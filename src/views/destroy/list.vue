@@ -49,7 +49,7 @@
         </template>
       </el-table-column>
     </el-table>
-    <Pagination :total="total" :limit.sync="limit" :page.sync="page" @pagination="fetchData"></Pagination>
+    <Pagination :total="total" :limit.sync="limit" :page.sync="page" @pagination="fetchData" />
 
     <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
       <el-form ref="dataForm" :rules="rules" :model="temp" label-position="left" label-width="70px">
@@ -63,7 +63,7 @@
           <el-date-picker v-model="temp.timeStamp" value-format="timestamp" type="date" />
         </el-form-item>
         <el-form-item label="原因" prop="message">
-          <el-input type="textarea" :rows="2" v-model="temp.message" />
+          <el-input v-model="temp.message" type="textarea" :rows="2" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -80,7 +80,6 @@
 
 <script>
 import { getList, update, postCreate, destroyDelete } from '@/api/destroy'
-import { constants } from 'fs';
 import Pagination from '@/components/Pagination'
 
 export default {
@@ -93,7 +92,7 @@ export default {
       }
       return statusMap[status]
     },
-    tokenMoney(value){
+    tokenMoney(value) {
       const arr = value.toString().split('.')
       let last = ''
       if (arr.length > 1) {
@@ -134,7 +133,7 @@ export default {
   methods: {
     fetchData() {
       this.listLoading = true
-      getList({page: this.page, limit: this.limit}).then(response => {
+      getList({ page: this.page, limit: this.limit }).then(response => {
         this.list = response.result || []
         this.total = response.total || 0
         this.listLoading = false
@@ -143,14 +142,14 @@ export default {
     handleCreate() {
       this.resetTemp()
       this.dialogStatus = 'create'
-      this.dialogFormVisible = true;
-      this.$nextTick(()=>{
+      this.dialogFormVisible = true
+      this.$nextTick(() => {
         this.$refs.dataForm.clearValidate()
       })
     },
     handleUpdate(row) {
       const temp = Object.assign({}, row)
-      temp.timeStamp = temp.timeStamp * 1000;
+      temp.timeStamp = temp.timeStamp * 1000
       this.temp = temp
       this.dialogStatus = 'update'
       this.dialogFormVisible = true
@@ -168,7 +167,7 @@ export default {
     createData() {
       this.$refs.dataForm.validate(valid => {
         if (valid) {
-          const data = {...this.temp}
+          const data = { ...this.temp }
           data.timeStamp = data.timeStamp / 1000
           postCreate(data).then(res => {
             this.dialogFormVisible = false
@@ -182,7 +181,7 @@ export default {
     updateData() {
       this.$refs.dataForm.validate(valid => {
         if (valid) {
-          const data = {...this.temp}
+          const data = { ...this.temp }
           data.timeStamp = data.timeStamp / 1000
           update(data).then(res => {
             this.dialogFormVisible = false
