@@ -2,7 +2,7 @@ import request from '@/utils/request'
 
 export function getList(params) {
   return request({
-    url: '/destroy/list',
+    url: '/holder/list',
     method: 'get',
     params
   })
@@ -10,7 +10,7 @@ export function getList(params) {
 
 export function postCreate(data) {
   return request({
-    url: '/destroy/create',
+    url: '/holder/create',
     method: 'post',
     data
   })
@@ -18,16 +18,24 @@ export function postCreate(data) {
 
 export function update(data) {
   return request({
-    url: '/destroy/update',
+    url: '/holder/update',
     method: 'post',
     data
   })
 }
 
-export function destroyDelete(data) {
+export function holderDelete(data) {
   return request({
-    url: '/destroy/delete',
+    url: '/holder/delete',
     method: 'post',
     data
+  })
+}
+
+export function holderSearch(params) {
+  return request({
+    url: '/holder/search',
+    method: 'get',
+    params
   })
 }

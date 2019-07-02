@@ -85,6 +85,22 @@ export const constantRoutes = [
     ]
   },
 
+  {
+    path: '/holder',
+    component: Layout,
+    redirect: '/holder/list',
+    name: 'holder',
+    meta: { title: '排行榜', icon: 'user' },
+    children: [
+      {
+        path: 'list',
+        name: 'list',
+        component: () => import('@/views/holder/list'),
+        meta: { title: '排行榜', icon: 'table' }
+      }
+    ]
+  },
+
   // {
   //   path: '/example',
   //   component: Layout,
