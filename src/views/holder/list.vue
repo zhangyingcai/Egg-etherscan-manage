@@ -37,9 +37,14 @@
           {{ scope.row.percentage }} %
         </template>
       </el-table-column>
-      <el-table-column class-name="status-col" label="信息" align="center">
+      <el-table-column class-name="status-col" label="名称" align="center">
         <template slot-scope="scope">
           {{ scope.row.tag }}
+        </template>
+      </el-table-column>
+      <el-table-column class-name="status-col" label="简介" align="center">
+        <template slot-scope="scope">
+          {{ scope.row.message }}
         </template>
       </el-table-column>
       <el-table-column align="center" prop="created_at" label="操作" width="200">
@@ -66,8 +71,11 @@
         <el-form-item label="百分比" prop="percentage">
           <el-input v-model="temp.percentage" />
         </el-form-item>
-        <el-form-item label="信息" prop="tag">
-          <el-input v-model="temp.tag" type="textarea" :rows="2" />
+        <el-form-item label="名称" prop="tag">
+          <el-input v-model="temp.tag" />
+        </el-form-item>
+        <el-form-item label="简介" prop="message">
+          <el-input v-model="temp.message" type="textarea" :rows="2" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -125,9 +133,12 @@ export default {
         address: '',
         value: '',
         tag: '',
-        percentage: 0
+        percentage: 0,
+        message: ''
       },
-      rules: {},
+      rules: {
+        address: [{required: true, trigger: 'blur'}]
+      },
       address: ''
     }
   },
@@ -222,7 +233,8 @@ export default {
         address: '',
         value: '',
         tag: '',
-        percentage: 0
+        percentage: 0,
+        message: ''
       }
     }
   }
