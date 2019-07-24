@@ -123,7 +123,10 @@ export default {
         message: '',
         timeStamp: Date.now()
       },
-      rules: {}
+      rules: {
+        hash: [{ required: true, trigger: 'blur' }],
+        value: [{ required: true, trigger: 'blur' }]
+      }
     }
   },
   created() {
